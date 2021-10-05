@@ -12,6 +12,21 @@ import (
 	"time"
 )
 
+// var 语句可以出现在包或函数级别
+// 声明两个string变量
+var java, goLang string = "java", "go"
+
+// 也可以使用此声明变量列表
+var (
+	php bool = true
+	// 初始化了值可以省略类型，(自动推导类型)
+	python = 1024
+
+	price float32 = 9.9
+	// 浮点类型默认float64
+	price1 float64 = 9.9
+)
+
 /**
 主程序
 */
@@ -48,6 +63,9 @@ func main() {
 
 	// 打印时可接受参数%v
 	fmt.Printf("返回的三个参数分别是%v,%v,%v", arr1, arr2, arr3)
+	// 换个行
+	fmt.Print("\n")
+	fmt.Printf("打印事先声明的变量%v,%v,%v,%v", java, goLang, python, php)
 
 }
 
@@ -75,15 +93,21 @@ func logNoReturnAndParam() {
 /**
 接收三个参数，并且返回两个int类型一个string类型的值
 注意这里的返回值a,b,c被命名了
+返回值的命名应当具有一定含义，可以作为文档使用
+返回值命名时，返回最后可以直接return
 */
 func moreReturn(x, y, z int) (a, b int, c string) {
 	a = x + y + z
 	b = x * y * z
-	return a, b, "string"
+	// return a, b, "string"
+	// 效果同上return,如果方法比较长这种方式可读性比较差
+	return
 }
 
 // 对比上类方法
 func moreReturnV1(x, y, z int) (int, int, string) {
+	// := 语句可以省略var声明
+	// 但是 := 只能在函数内声明，方法外只能以关键字开头
 	a := x + y + z
 	b := x * y * z
 	return a, b, "string"
