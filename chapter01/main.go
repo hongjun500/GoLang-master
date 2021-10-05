@@ -66,6 +66,14 @@ func main() {
 	// 换个行
 	fmt.Print("\n")
 	fmt.Printf("打印事先声明的变量%v,%v,%v,%v", java, goLang, python, php)
+	// 换个行
+	fmt.Print("\n")
+
+	// 数值类型显示转换
+	var x, y int = 3, 4
+	var f float64 = math.Sqrt(float64(x*x + y*y))
+	var z uint = uint(f)
+	fmt.Printf("\nx,y,f,z的值%v,%v,%v,%v", x, y, f, z)
 
 }
 
