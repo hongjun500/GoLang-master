@@ -49,6 +49,46 @@ func main() {
 	// 这两个结果不一样
 	fmt.Println(1 / 2)
 	fmt.Println(1 / 2.0)
+
+	// switch语句 从上向下执行(可以没有小括号，大括号必须)
+	// 同if一样可以有短变量声明
+	// 每个case结构体后有默认的break,
+	// 并且只会运行表达式对应选中的case，此时switch运行到此结束
+	// 如果选中了case并且对应case包含一个fallthrough关键字语句，那么紧随其后的case也会执行
+
+	// 可以没有default语句
+
+	// 这个switch只会打印出Go
+	switch lang := "Go"; lang {
+	case "Go":
+		fmt.Println("Go.")
+	case "Java":
+		fmt.Println("Java.")
+		fallthrough
+	case "Python":
+		fmt.Println("Python.")
+
+		/*default:
+		fmt.Printf("%s.\n", lang)*/
+	}
+
+	// 这个switch会打印出Go And Java
+	switch lang2 := "Go"; lang2 {
+	case "Go":
+		fmt.Print("Go And ")
+		// 在这里停止，执行下一个case且只执行下一个
+		fallthrough
+		// 这里会报错，由于有fallthrough的存在，程序将会直接去执行下一个case结构体或者是default中的代码
+		// fmt.Println("log")
+	/*case "Java":
+		fmt.Println(" Java.")
+	case "Python":
+		fmt.Println("Python.")
+	*/
+	default:
+		fmt.Printf("%s.\n", lang2)
+	}
+
 }
 
 /**
