@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"math"
+	"os"
 )
 
 func main() {
@@ -89,6 +91,9 @@ func main() {
 		fmt.Printf("%s.\n", lang2)
 	}
 
+	b()
+	fmt.Println("\n")
+	fmt.Println(c())
 }
 
 /**
@@ -140,4 +145,55 @@ func SqrtFloat64(x float64) float64 {
 		z -= (z*z - x) / (2 * z)
 	}
 	return z
+}
+
+// defer 确保打开文件后能关闭该文件
+func CopyFile(dstName, srcName string) (written int64, err error) {
+	src, err := os.Open(srcName)
+	if err != nil {
+		return
+	}
+	defer func(src *os.File) {
+		err := src.Close()
+		if err != nil {
+
+		}
+	}(src)
+
+	dst, err := os.Create(dstName)
+	if err != nil {
+		return
+	}
+	defer func(dst *os.File) {
+		err := dst.Close()
+		if err != nil {
+
+		}
+	}(dst)
+
+	return io.Copy(dst, src)
+}
+
+func A() {
+	i := 0
+	/*defer*/ fmt.Println(i)
+	i++
+	return
+}
+
+func b() {
+	for i := 0; i < 4; i++ {
+		// 延迟打印0
+		// 延迟打印1
+		// 延迟打印2
+		// 延迟打印3
+		defer fmt.Print(i)
+		// 按照先进后出的策略最后结果会是3210
+	}
+	return
+}
+
+func c() (i int) {
+	defer func() { i++ }()
+	return 1
 }
