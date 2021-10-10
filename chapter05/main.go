@@ -43,8 +43,17 @@ func main() {
 
 	// 切片可以截取
 	// 切片通过两个下标来截取，一个上界一个下界两者之间以冒号分割
-	// splice[low:high],半开区间，包含low,排除high
-
+	// splice[begin:end],半开区间，包含begin,排除end
+	// 有多种写法  splice[:high]  从下标0开始到下标end-1的元素
+	// 有多种写法  splice[begin:]  从下标begin开始所有的元素
+	// 有多种写法  splice[:]  从下标0开始到下标最大值位置的元素(即所有元素)
+	var srcarr = []string{"见到你", "很高兴"}
+	fmt.Printf("最开始srcarr的值%v \n", srcarr)
+	newarr := srcarr[:1]
+	// 这里由于newarr是经过引用srcarr得到的，那么newarr改变了之后srcarr也改变了，其本质上切片就是由指针指向数组
+	newarr[0] = ""
+	fmt.Printf("newarr的值%v \n", newarr)
+	fmt.Printf("引用了切片srcarr后的值%v \n", srcarr)
 	// 切片的复制 使用内置函数copy
 	strArr := make([]string, 2)
 	strArr[0] = "go"
@@ -63,5 +72,17 @@ func main() {
 	// arr1再追加元素
 	newArr1 := append(strings, "is", "good")
 	fmt.Printf("strings追加单个字符串元素之后的值%v \n", newArr1)
+	learn1(12)
+
+}
+
+func learn1(lens int) {
+	var s []int
+	var factor int
+	fmt.Printf("切片s原始长度= %v \n", len(s))
+	fmt.Printf("factor= %v \n", factor)
+	factor = lens
+	s = make([]int, factor)
+	fmt.Printf("切片s扩展后长度= %v \n", factor)
 
 }
