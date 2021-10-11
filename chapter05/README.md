@@ -15,4 +15,13 @@
      就是最后一个元素取下标为下界值减一，反之则是都要(加深自我理解) 
    - 内置函数copy(new []Type, src []Type)也可以将切片src的值覆盖到切片new里面，返回的值是拷贝元素的个数，并且由两者之间最小长度决定
    - 内置函数append(slice []Type, elems ...Type), 将元素拼加到slice后面得到一个新的切片(这个elems可以是一个同类型的切片)
-   
+ - map
+   > 元素对的无序集合
+   > 在Golang中因为线程安全的问题将map分为了无锁的map和自带锁的 sync.Map
+     - 无锁map
+       - 声明方式var mapName map[T]T
+       - 初始化使用make关键字 make(map[T]T)
+       - map的取值：mapName["key"],该表达式会返回两个元素，一个是值，一个是布尔类型的判断key是否存在于该map中
+       - map的遍历可以使用for循环加上range关键字
+       - map删除元素可以使用内置函数delete(m map[Type]Type1, key Type),并且如果key不存在也不会有问题(排除极端情况)
+     - sync.Map

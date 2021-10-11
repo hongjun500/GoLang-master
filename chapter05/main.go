@@ -75,6 +75,10 @@ func main() {
 	fmt.Printf("strings追加单个字符串元素之后的值%v \n", newArr1)
 	learn1(12)
 
+	fmt.Println("分割线map-------------------------------------------------")
+	maps()
+	mapSlice()
+
 }
 
 func learn1(lens int) {
