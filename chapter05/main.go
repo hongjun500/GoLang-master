@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	// 数组声明形式：var 数组名 [数组长度]数组类型，数组类型也可以是数组，因此可以构成数组类型的数组，即多维数组
@@ -34,11 +36,53 @@ func main() {
 	// 长度必须定义，容量可以省略并且容量必须大于等于长度
 	arrSlice = make([]string, 10, 10)
 	arrSlice[0] = "hello"
+	arrSlice[1] = "word"
 	fmt.Printf("切片arrSlice%v \n", arrSlice)
 	fmt.Printf("切片arrSlice长度%v \n", len(arrSlice))
 	fmt.Printf("切片arrSlice容量%v \n", cap(arrSlice))
 
 	// 切片可以截取
 	// 切片通过两个下标来截取，一个上界一个下界两者之间以冒号分割
-	// splice[low:high],半开区间，包含low,排除high
+	// splice[begin:end],半开区间，包含begin,排除end
+	// 有多种写法  splice[:high]  从下标0开始到下标end-1的元素
+	// 有多种写法  splice[begin:]  从下标begin开始所有的元素
+	// 有多种写法  splice[:]  从下标0开始到下标最大值位置的元素(即所有元素)
+	var srcarr = []string{"见到你", "很高兴"}
+	fmt.Printf("最开始srcarr的值%v \n", srcarr)
+	newarr := srcarr[:1]
+	// 这里由于newarr是经过引用srcarr得到的，那么newarr改变了之后srcarr也改变了，其本质上切片就是由指针指向数组
+	newarr[0] = ""
+	fmt.Printf("newarr的值%v \n", newarr)
+	fmt.Printf("引用了切片srcarr后的值%v \n", srcarr)
+	// 切片的复制 使用内置函数copy
+	strArr := make([]string, 2)
+	strArr[0] = "go"
+	fmt.Printf("拷贝之前strArr=%v \n", strArr)
+	// 将arrSlice的元素拷贝给到strArr(会覆盖strArr原有的元素),拷贝个数由两者长度最小值确定
+	i := copy(strArr, arrSlice)
+	fmt.Printf("总共拷贝了%d 个元素 \n", i)
+	fmt.Printf("拷贝之后strArr=%v \n", strArr)
+
+	// 切片的追加 使用内置函数append
+	var arr1 = []string{"hello", ",", "go"}
+	arr2 := []string{"language"}
+	// 将切片arr2的元素追加到arr1后面
+	strings := append(arr1, arr2...)
+	fmt.Printf("arr1追加一个切片arr2之后的值%v \n", strings)
+	// arr1再追加元素
+	newArr1 := append(strings, "is", "good")
+	fmt.Printf("strings追加单个字符串元素之后的值%v \n", newArr1)
+	learn1(12)
+
+}
+
+func learn1(lens int) {
+	var s []int
+	var factor int
+	fmt.Printf("切片s原始长度= %v \n", len(s))
+	fmt.Printf("factor= %v \n", factor)
+	factor = lens
+	s = make([]int, factor)
+	fmt.Printf("切片s扩展后长度= %v \n", factor)
+
 }
