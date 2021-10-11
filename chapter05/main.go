@@ -62,6 +62,7 @@ func main() {
 	i := copy(strArr, arrSlice)
 	fmt.Printf("总共拷贝了%d 个元素 \n", i)
 	fmt.Printf("拷贝之后strArr=%v \n", strArr)
+	fmt.Printf("拷贝之后arrSlice=%v \n", arrSlice)
 
 	// 切片的追加 使用内置函数append
 	var arr1 = []string{"hello", ",", "go"}
